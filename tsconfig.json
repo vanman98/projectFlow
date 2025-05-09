@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "ES2020", // Output modern JS
+        "module": "commonjs", // Use CommonJS module system
+        "outDir": "./dist", // Compiled files output to /dist
+        "rootDir": "./src", // Source files located in /src
+        "strict": true, // Enable all strict type-checking options
+        "esModuleInterop": true, // Allow default imports from CommonJS modules
+        "experimentalDecorators": true, // Enable decorator syntax
+        "emitDecoratorMetadata": true // Emit metadata for decorators (required by TypeORM)
+    }
+}

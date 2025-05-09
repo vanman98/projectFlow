@@ -1,0 +1,1 @@
+2025-05-09 14:41:13 [[31merror[39m]: Failed to start server: Cannot determine GraphQL output type for 'newProject' of 'ProjectResolver' class. Is the value, that is used as its TS type or explicit type, decorated with a proper decorator or is it a proper output value?
