@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 
 // GraphQL type for User, excluding password
 @ObjectType()
-class UserType {
+export class UserType {
     @Field()
     id!: number;
 

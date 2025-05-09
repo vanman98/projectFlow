@@ -7,10 +7,12 @@ import { User } from '../models/User';
 import { Project } from '../models/Project';
 import { createUserLoader } from '../loaders/userLoader';
 import { PubSubEngine } from 'graphql-subscriptions';
+import { UserType } from './UserResolver';
+import { ProjectType } from './ProjectResolver';
 
 // ObjectType to shape Task data returned by GraphQL
 @ObjectType()
-class TaskType {
+export class TaskType {
     @Field(() => Int)
     id!: number;
 
@@ -24,10 +26,10 @@ class TaskType {
     description?: string;
 
     // Expose related project and assignee via resolvers
-    @Field(() => Project)
+    @Field(() => ProjectType)
     project!: Project;
 
-    @Field(() => User)
+    @Field(() => UserType)
     assignee!: User;
 }
 
@@ -118,7 +120,7 @@ export class TaskResolver {
     }
 
     // Subscription to listen for newly created tasks
-    @Subscription({ topics: 'TASK_CREATED' })
+    @Subscription(() => TaskType, { topics: 'TASK_CREATED' })
     newTask(
         @Root() task: Task
     ): Task {

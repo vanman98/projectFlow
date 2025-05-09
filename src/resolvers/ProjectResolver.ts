@@ -6,12 +6,14 @@ import { Project } from '../models/Project';
 import { User } from '../models/User';
 import { Task } from '../models/Task';
 import { createUserLoader } from '../loaders/userLoader';
+import { UserType } from './UserResolver';
+import { TaskType } from './TaskResolver';
 
 /**
  * GraphQL Object Type for Project, defining the fields exposed to clients.
  */
 @ObjectType()
-class ProjectType {
+export class ProjectType {
     @Field(() => Int)
     id!: number;
 
@@ -21,10 +23,10 @@ class ProjectType {
     @Field({ nullable: true })
     description?: string;
 
-    @Field(() => User)
+    @Field(() => UserType)
     owner!: User;
 
-    @Field(() => [Task])
+    @Field(() => [TaskType])
     tasks!: Task[];
 }
 
@@ -126,7 +128,7 @@ export class ProjectResolver {
     /**
      * Subscription: Listen for newly created projects.
      */
-    @Subscription({ topics: 'PROJECT_CREATED' })
+    @Subscription(() => ProjectType, { topics: 'PROJECT_CREATED' })
     newProject(@Root() project: Project): Project {
         return project;
     }
